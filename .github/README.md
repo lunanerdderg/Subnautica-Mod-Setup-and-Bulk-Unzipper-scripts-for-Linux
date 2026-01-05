@@ -98,7 +98,8 @@ Every listed parameter is optional, and may be used in any order.
     path/to/directory        Use path as Subnautica game directory instead of Steam's default
     -n, --no-tweaks          Do not install Toebeann's BepInEx Tweaks for Subnautica
     -t, --terrain-patcher    Install Esper89's Terrain Patcher mod
-    -d, --disable-autoopen   Do not open Subnautica automatically. Allow user to do it manually instead. Exiting from Steam fully is NOT NECESSARY with this option.
+    -d, --disable-autoopen   Do not open Subnautica automatically. Allow user to do it manually 
+	                         instead. Exiting from Steam fully is NOT NECESSARY with this option.
     -i, --ignore-prompt      Disable most user prompts (do NOT use if first time running)
 *Note: It's impossible to fully automate this script. Eventually the user will encounter at least one prompt.*
 

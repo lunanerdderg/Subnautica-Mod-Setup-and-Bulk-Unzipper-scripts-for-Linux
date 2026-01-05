@@ -164,9 +164,9 @@ echo ""
 echo "Done!"
 echo "Now download any mods you like from Nexus or Github, and place them in '$subnauticaDirectory/BepInEx/plugins/' (WITHOUT unzipping)."
 if [ $changedDirectory = "n" ]; then
-    echo "Then run 'unzip-mods-in-bulk.sh', and you're done!"
+    echo "Then run 'unzip-mods-in-bulk.sh', and you're finished!"
 else
-    echo "Then run 'unzip-mods-in-bulk.sh -n $subnauticaDirectory', and you're done!"
+    echo "Then run 'unzip-mods-in-bulk.sh -n $subnauticaDirectory', and you're finished!"
 fi
 echo ""
 echo ""
@@ -177,3 +177,6 @@ if [ $changedDirectory = "n" ]; then
 else
     echo "unzip-mods-in-bulk.sh <folder/zips/are/stored/in> $subnauticaDirectory'"
 fi
+echo ""
+echo "If everything installed successfully, 'install.sh' is no longer necessary and can now be deleted."
+

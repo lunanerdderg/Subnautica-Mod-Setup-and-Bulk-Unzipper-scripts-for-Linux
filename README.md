@@ -1,2 +1,0 @@
-# Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux
-An attempt to make an easy, as-automated-as-possible setup and installation software for Subnautica mods on Linux. It will install BepInEx and Nautilus for you, and provide easy installation of new mods in bulk, (they must be downloaded beforehand, though). This project is CLI and there are no plans to create a GUI, but feel free to make your own!

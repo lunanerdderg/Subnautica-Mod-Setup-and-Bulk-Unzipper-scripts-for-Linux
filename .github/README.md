@@ -2,6 +2,8 @@
 
 These scripts are intended for Linux, and only work on Linux.
 
+These scripts are also intended for Steam. Other launcher users should look at the [Epic Launcher users](#epic-launcher-users) section.
+
 * [`install.sh`](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/install.sh) semi-automates and eases the process of installing BepInEx and Nautilus.
 
 * [`unzip-mods-in-bulk.sh`](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/unzip-mods-in-bulk.sh) installs already-downloaded mods (which you can get from [Nexus](https://www.nexusmods.com/games/subnautica), [Github](https://github.com/topics/subnautica), or [Discord](https://discord.gg/UpWuWwq)) in bulk, so you don't have to extract every one of them yourself. It handles .zip, .7z, .rar, and .tar archives as well as their subfolders.
@@ -115,6 +117,20 @@ Example: `unzip-mods-in-bulk.sh -n directory/of/Subnautica`
 	2. Directory of Subnautica game folder
 
 *Note: Unlike `install.sh`, this script has no user prompts.*
+
+## Epic Launcher users:
+
+I do not own any Epic games, nor have I installed the launcher, so I truly have no idea if this will work on Epic. You might have some success if you follow the normal [installation](#install) and [use](#directions) instructions, but run `install.sh` like this:
+
+```
+install.sh -d <location of Subnautica folder>
+```
+
+Then open and close Subnautica in Epic when it prompts you. Also run `unzip-mods-in-bulk.sh` like this:
+
+```
+install.sh <location of mods> <location of Subnautica folder>
+```
 
 # License
 

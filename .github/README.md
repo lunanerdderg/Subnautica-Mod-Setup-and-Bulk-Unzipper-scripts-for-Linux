@@ -6,7 +6,7 @@ These scripts are intended for Linux, and only work on Linux.
 
 * [`unzip-mods-in-bulk.sh`](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/unzip-mods-in-bulk.sh) installs already-downloaded mods (which you can get from [Nexus](https://www.nexusmods.com/games/subnautica), [Github](https://github.com/topics/subnautica), or [Discord](https://discord.gg/UpWuWwq)) in bulk, so you don't have to extract every one of them yourself. It handles .zip, .7z, .rar, and .tar archives as well as their subfolders.
   * (The organization of subfolders is different between mods, since mod developers are a community of people. The script should be able to handle most inconsistencies.)
-  * This script can be re-used as much as you like to install more mods.
+  * `unzip-mods-in-bulk.sh` can be re-used as much as you like to install more mods.
 
 # IMPORTANT (before you begin):
 
@@ -22,7 +22,7 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
 
 ### How to change Launch Options:
 
-(Unfortunately, I know of no way to automate this process through scripting.)
+(Unfortunately, I don't know any way to automate this process through scripting.)
 
 1. Go to your Steam Library and navigate to Subnautica.
 2. Right click on Subnautica in the sidebar, or click the gear icon.

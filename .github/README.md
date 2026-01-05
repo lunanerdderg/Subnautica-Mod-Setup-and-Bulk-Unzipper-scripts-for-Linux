@@ -1,4 +1,4 @@
-#### TL;DR: Copy and paste the [Launch Options](#launch-options-necessary) into Subnautica's properties, run the [install command](#install), run `install.sh`, fully exit Steam, download your desired mods and dependencies into `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/`, then run `unzip-mods-in-bulk.sh`.
+#### TL;DR: Copy and paste the [Launch Options](#launch-options-necessary) into Subnautica's properties, run the [install command](#install), run `install.sh`, [fully exit Steam](#directions), download your desired mods and dependencies into `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/`, then run `unzip-mods-in-bulk.sh`.
 
 These scripts are intended for Linux, and only work on Linux.
 

@@ -69,7 +69,7 @@ chmod +x unzip-mods-in-bulk.sh
 
 ### Releases:
 
-As an alternative to the command, you can download your preferred release [here](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/releases), unzip it, and run `chmod +x` on both shell scripts.
+As an alternative to the command, you can download your preferred release [here](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/releases), decompress it, and run `chmod +x` on both shell scripts.
 
 # Directions:
 

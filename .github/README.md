@@ -81,11 +81,11 @@ Don't worry about memorizing any instructions. `install.sh` will remind you.
 2. [Install the scripts.](#install)
 3. Run `install.sh` in the terminal (ideally the same terminal as before) with the desired [parameters](#parameters) listed below. Follow any instructions it gives you.
 4. When it automatically opens Subnautica for you, first quit from Subnautica's main menu, then exit Steam ***ENTIRELY***. (Go to the top left, click the Steam logo, then click "Exit". The "x" at the top right will only MINIMIZE it.)
-    * `install.sh` can now be deleted, if you want.
-6. *Keep the terminal window open.* Download all the mods you want to install. (Make sure to keep track of dependencies! *On Nexus in a mod's "Description" tab, clicking the "Requirements" button will reveal them.*)
 
    <img src="https://raw.githubusercontent.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/master/.github/exit-screenshot.jpg" alt="Steam Exit screenshot" width="400"/>
 
+    * `install.sh` can now be deleted, if you want.
+6. *Keep the terminal window open.* Download all the mods you want to install. (Make sure to keep track of dependencies! *On Nexus in a mod's "Description" tab, clicking the "Requirements" button will reveal them.*)
 7. Place all the mods in a single folder if you want to keep the .zips, or place them in `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/` if you do not.
 8. Run `unzip-mods-in-bulk.sh` in the terminal (again, ideally the same terminal as before) with the location of your mod folder as an argument, or leave blank if you placed your mods in `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/`.
 

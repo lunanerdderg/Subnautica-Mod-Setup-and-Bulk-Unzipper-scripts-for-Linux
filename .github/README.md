@@ -136,4 +136,3 @@ You may view the Mozilla Public License 2.0 [here](https://raw.githubusercontent
 
 * You credit me
 * Your project is open-source
-* Your project uses the same license

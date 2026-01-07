@@ -120,7 +120,7 @@ fi
 echo "Installing BepInEx..."
 cd $subnauticaDirectory
 wget https://github.com/toebeann/BepInEx.Subnautica/releases/latest/download/Tobey.s.BepInEx.Pack.for.Subnautica.zip
-unzip Tobey.s.BepInEx.Pack.for.Subnautica.zip
+y | unzip Tobey.s.BepInEx.Pack.for.Subnautica.zip
 rm -f Tobey.s.BepInEx.Pack.for.Subnautica.zip
 cd $HOME
 

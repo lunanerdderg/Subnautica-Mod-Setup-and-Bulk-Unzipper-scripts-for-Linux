@@ -91,6 +91,12 @@ fi
 if [ ! -d "$subnauticaDirectory" ]; then
     subnauticaDirectory="$HOME/.local/share/Steam/steamapps/common/Subnautica/"
     if [ ! -d "$subnauticaDirectory" ]; then
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo ""
         echo "Could not find Subnautica directory. Check if installed with Steam, or pass location as argument."
         echo "(Usually '$HOME/.local/share/Steam/steamapps/common/Subnautica/')"
         exit 1
@@ -103,12 +109,18 @@ if [ -d "$subnauticaDirectory/BepInEx" ]; then
             if [ -d "$subnauticaDirectory/BepInEx/plugins/Tobey" ]; then
                 rm -rf "$subnauticaDirectory/BepInEx"
             else
+                echo ""
+                echo ""
+                echo ""
                 echo "$subnauticaDirectory/BepInEx already exists. Please back up $subnauticaDirectory/BepInEx/config and $subnauticaDirectory/BepInEx/plugins, then delete."
                 exit 1
             fi
         elif  find "$subnauticaDirectory/BepInEx/plugins" -maxdepth 0 -empty | read v; then
             rm -rf "$subnauticaDirectory/BepInEx"
         else
+            echo ""
+            echo ""
+            echo ""
             echo "$subnauticaDirectory/BepInEx already exists. Please back up $subnauticaDirectory/BepInEx/config and $subnauticaDirectory/BepInEx/plugins, then delete."
             exit 1
         fi

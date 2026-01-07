@@ -124,7 +124,7 @@ I do not own any Epic games, nor have I ever used the Epic Games Store, so I tru
 install.sh -d <location of Subnautica folder>
 ```
 
-Then open and close Subnautica in Epic when it prompts you. Also run `unzip-mods-in-bulk.sh` like this:
+Then open and close Subnautica when it prompts you. Also run `unzip-mods-in-bulk.sh` like this:
 
 ```
 install.sh <location of mods> <location of Subnautica folder>

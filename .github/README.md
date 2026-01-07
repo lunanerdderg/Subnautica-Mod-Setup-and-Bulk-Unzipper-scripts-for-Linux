@@ -81,7 +81,7 @@ Don't worry about memorizing any instructions. `install.sh` will remind you.
 2. Copy and paste the [Launch Options](#launch-options-necessary) into Subnautica's properties.
 3. [Install the scripts.](#install)
 4. Run `install.sh` in the terminal (ideally the same terminal as before) with the desired [parameters](#parameters) listed below. Follow any instructions it gives you.
-5. When it automatically opens Subnautica for you, quit from Subnautica's main menu. (Fully exiting Steam is no longer necessary as of [v0.2.0](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/releases/tag/v0.2.0).)
+5. When it automatically opens Subnautica for you, quit from Subnautica's main menu. (Fully exiting Steam is no longer necessary as of [v0.1.2](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/releases/tag/v0.1.2).)
     * `install.sh` can now be deleted, if you want.
 6. *Keep the terminal window open.* Download all the mods you want to install. (Make sure to keep track of dependencies! *On Nexus in a mod's "Description" tab, clicking the "Requirements" button will reveal them.*)
 7. Place all the mods in a single folder if you want to keep the .zips, or place them in `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/` if you do not.

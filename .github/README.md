@@ -132,7 +132,7 @@ install.sh <location of mods> <location of Subnautica folder>
 
 # License
 
-You may view the Mozilla Public License 2.0 [here](https://raw.githubusercontent.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/master/.github/LICENSE.txt), but the TL;DR is that you can use this project for whatever you like, as long as:
+You may view the Mozilla Public License 2.0 [here](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/LICENSE), but the TL;DR is that you can use this project for whatever you like, as long as:
 
 * You credit me
 * Your project is open-source

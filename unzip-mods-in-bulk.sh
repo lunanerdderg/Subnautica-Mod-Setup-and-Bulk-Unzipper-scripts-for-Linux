@@ -27,8 +27,7 @@ if [ $directory = "-n" ] || [ $directory = "--None" ]; then
         echo "(eg 'unzip-mods-in-bulk.sh --None <path/to/Subnautica>')"
         exit 1
     fi
-    for file in $subnauticaDirectory/BepInEx/plugins/*
-    do
+    for file in $subnauticaDirectory/BepInEx/plugins/*; do
         if [[ "${file}" = *".zip" ]] || [[ "${file}" = *".7z" ]] || [[ "${file}" = *".rar" ]] || [[ "${file}" = *".tar"* ]]; then
             mv "${file}" "${directory}/$(basename ${file})"
         fi
@@ -36,8 +35,7 @@ if [ $directory = "-n" ] || [ $directory = "--None" ]; then
 fi
 
 temp_dir=$(mktemp -d)
-for file in $directory/*
-do
+for file in $directory/*; do
     if [[ $file == *.zip ]] || [[ $file == *.7z ]] || [[ $file == *.rar ]] || [[ $file == *.tar* ]]; then
         echo "Safe"
         safe="y"
@@ -77,47 +75,51 @@ do
         fi
         if [ $safe = "y" ]; then
             cd $temp_dir
-            if [ -d "BepInEx" ]; then
-                for folder in BepInEx/*
-                do
-                    cd /
-                    mv "${temp_dir}/${folder}" "${subnauticaDirectory}/${folder}"
-                done
-                rm -rf "$temp_dir/BepInEx"
-            elif [ -d "BepInEx/plugins" ]; then
-                for folder in BepInEx/plugins/*
-                do
-                    cd /
-                    mv "${temp_dir}/${folder}" "${subnauticaDirectory}/${folder}"
-                done
-                rm -rf "$temp_dir/BepInEx"
+            folderToRemove="--None"
+            if [ -d "BepInEx/plugins" ]; then
+                folderToRemove="BepInEx/plugins"
+            elif [ -d "BepInEx" ]; then
+                folderToRemove="BepInEx"
             elif [ -d "plugins" ]; then
-                for folder in plugins/*
-                do
-                    cd /
-                    mv "${temp_dir}/${folder}" "${subnauticaDirectory}/BepInEx/${folder}"
+                folderToRemove="plugins"
+            fi
+            if [ $folderToRemove == "--None" ]; then
+                for modFolder in *; do
+                    find $modFolder -type d -empty -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
+                        if [ ! -d "${destination}" ]; then
+                            mkdir -p "${destination}"
+                        fi
+                    done
+                    find $modFolder -type f -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
+                        if [ ! -d "${destination%/*}" ]; then
+                            mkdir -p "${destination%/*}"
+                        fi
+                        mv "${curFile}" "${destination}"
+                    done
                 done
-                rm -rf "$temp_dir/plugins"
             else
-                for folder in *
-                do
-                    mv "${folder}" "${subnauticaDirectory}/BepInEx/plugins/${folder}"
+                for modFolder in $folderToRemove/*; do
+                    find $modFolder -type d -empty -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$folderToRemove\//}"
+                        if [ ! -d "${destination}" ]; then
+                            mkdir -p "${destination}"
+                        fi
+                    done
+                    find $modFolder -type f -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$folderToRemove\//}"
+                        if [ ! -d "${destination%/*}" ]; then
+                            mkdir -p "${destination%/*}"
+                        fi
+                        mv "${curFile}" "${destination}"
+                    done
                 done
             fi
+            rm -rf "${temp_dir}/"*
         fi
     fi
 done
 rm -rf "$temp_dir"
-# cd $HOME
-# if [ -d "$subnauticaDirectory/BepInEx/plugins/Tobey" ]; then
-#     for file in "$subnauticaDirectory/BepInEx/plugins/Tobey/"*
-#     do
-#         echo
-#         echo "$file"
-#         echo
-#         mv "$file" "${file/Tobey\//}"
-#     done
-#     rm -rf "$subnauticaDirectory/BepInEx/plugins/Tobey"
-# fi
 
 echo "Done! All your mods should now be playable!"

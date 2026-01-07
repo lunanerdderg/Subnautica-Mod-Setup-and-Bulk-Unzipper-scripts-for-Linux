@@ -29,20 +29,21 @@ if [ $directory = "-n" ] || [ $directory = "--None" ]; then
     fi
     for file in $subnauticaDirectory/BepInEx/plugins/*; do
         if [[ "${file}" = *".zip" ]] || [[ "${file}" = *".7z" ]] || [[ "${file}" = *".rar" ]] || [[ "${file}" = *".tar"* ]]; then
-            mv "${file}" "${directory}/$(basename ${file})"
+            echo "$file"
+            mv "${file}" "${directory}/$(basename "${file}")"
         fi
     done
 fi
 
 temp_dir=$(mktemp -d)
+trap 'rm -rf -- "$temp_dir"' EXIT
 for file in $directory/*; do
     if [[ $file == *.zip ]] || [[ $file == *.7z ]] || [[ $file == *.rar ]] || [[ $file == *.tar* ]]; then
-        echo "Safe"
         safe="y"
         cd $directory
-        if [[ $file == *.zip ]]; then
+        if [[ "${file}" == *.zip ]]; then
             unzip "$file" -d "$temp_dir"
-        elif [[ $file == *.7z ]]; then
+        elif [[ "${file}" == *.7z ]]; then
             if ! command -v 7z >/dev/null 2>&1
             then
                 echo
@@ -56,7 +57,7 @@ for file in $directory/*; do
             else
                 7z x "$file" -o"$temp_dir"
             fi
-            elif [[ $file == *.rar ]]; then
+            elif [[ "${file}" == *.rar ]]; then
             if ! command -v unrar >/dev/null 2>&1
             then
                 echo
@@ -70,29 +71,29 @@ for file in $directory/*; do
             else
                 unrar x "$file" "$temp_dir"
             fi
-        elif [[ $file == *.tar* ]]; then
+        elif [[ "${file}" == *.tar* ]]; then
             tar –xf "$file" -C "$temp_dir"
         fi
         if [ $safe = "y" ]; then
             cd $temp_dir
-            folderToRemove="--None"
-            if [ -d "BepInEx/plugins" ]; then
-                folderToRemove="BepInEx/plugins"
-            elif [ -d "BepInEx" ]; then
-                folderToRemove="BepInEx"
-            elif [ -d "plugins" ]; then
-                folderToRemove="plugins"
-            fi
-            if [ $folderToRemove == "--None" ]; then
+            pluginsFolder=$(find "$temp_dir" -type d -name "plugins" || echo "")
+            configFolder=$(find "$temp_dir" -type d -name "config" || echo "")
+            if [ -z "$pluginsFolder" ]; then
                 for modFolder in *; do
-                    find $modFolder -type d -empty -print0 | while read -d $'\0' curFile; do
+                    find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
                         destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
                         if [ ! -d "${destination}" ]; then
                             mkdir -p "${destination}"
                         fi
                     done
-                    find $modFolder -type f -print0 | while read -d $'\0' curFile; do
+                    find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
                         destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
+                        if [[ "${curFile}" =  *".structure" ]]; then
+                            destination="$subnauticaDirectory/BepInEx/plugins/EpicStructureLoader/Structures/$(basename "${curFile}")"
+                        fi
+                        if [[ "${curFile}" =  *".txt" ]]; then
+                            destination="$subnauticaDirectory/BepInEx/plugins/CustomCraft3/WorkingFiles/$(basename "${curFile}")"
+                        fi
                         if [ ! -d "${destination%/*}" ]; then
                             mkdir -p "${destination%/*}"
                         fi
@@ -100,15 +101,35 @@ for file in $directory/*; do
                     done
                 done
             else
-                for modFolder in $folderToRemove/*; do
-                    find $modFolder -type d -empty -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$folderToRemove\//}"
+                for modFolder in "${pluginsFolder}"/*; do
+                    find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$pluginsFolder\//}"
                         if [ ! -d "${destination}" ]; then
                             mkdir -p "${destination}"
                         fi
                     done
-                    find $modFolder -type f -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$folderToRemove\//}"
+                    find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$pluginsFolder\//}"
+                        if [[ "${curFile}" =  *".structure" ]]; then
+                            destination="$subnauticaDirectory/BepInEx/plugins/EpicStructureLoader/Structures/$(basename "${curFile}")"
+                        fi
+                        if [ ! -d "${destination%/*}" ]; then
+                            mkdir -p "${destination%/*}"
+                        fi
+                        mv "${curFile}" "${destination}"
+                    done
+                done
+            fi
+            if [ ! -z "$configFolder" ]; then
+                for modFolder in "${configFolder}"/*; do
+                    find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/config/${curFile/$configFolder\//}"
+                        if [ ! -d "${destination}" ]; then
+                            mkdir -p "${destination}"
+                        fi
+                    done
+                    find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
+                        destination="$subnauticaDirectory/BepInEx/config/${curFile/$configFolder\//}"
                         if [ ! -d "${destination%/*}" ]; then
                             mkdir -p "${destination%/*}"
                         fi
@@ -120,6 +141,6 @@ for file in $directory/*; do
         fi
     fi
 done
-rm -rf "$temp_dir"
+rm -rf $temp_dir
 
 echo "Done! All your mods should now be playable!"

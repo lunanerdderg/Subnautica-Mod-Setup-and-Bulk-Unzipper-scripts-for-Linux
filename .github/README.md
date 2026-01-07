@@ -59,11 +59,11 @@ Use [`cd`](https://www.geeksforgeeks.org/linux-unix/cd-command-in-linux-with-exa
 
 ```
 curl -s https://api.github.com/repos/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/releases/latest \
-| grep "browser_download_url.*ubnautica-Mod-Setup-and-Install-scripts-for-Linux.tar" \
+| grep "browser_download_url.*Linux.tar" \
 | cut -d : -f 2,3 \
 | tr -d \" \
 | wget -qi -
-tar Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux.tar
+tar -xf Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux.tar
 rm -f Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux.tar
 chmod +x install.sh
 chmod +x unzip-mods-in-bulk.sh

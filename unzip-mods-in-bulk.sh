@@ -2,9 +2,9 @@
 
 directory=${1:-"--None"}
 subnauticaDirectory=${2:-"$HOME/.local/share/Steam/steamapps/common/Subnautica"}
-helpOrNot=${3:-"--None"}
+extraArg=${3:-"--None"}
 
-if [ $directory = "-h" ] || [ $directory = "--help" ] || [ $subnauticaDirectory = "-h" ] || [ $subnauticaDirectory = "--help" ]; then
+if [ $directory = "-h" ] || [ $directory = "--help" ] || [ $subnauticaDirectory = "-h" ] || [ $subnauticaDirectory = "--help" ] || [ $extraArg = "-h" ] || [ $extraArg = "--help" ]; then
     echo
     echo "All listed parameters are optional, but must be used IN ORDER. If you want to use the second but not the first, use '-n' or '--None'"
     echo
@@ -27,8 +27,24 @@ if [ $directory = "-n" ] || [ $directory = "--None" ]; then
         echo "(eg 'unzip-mods-in-bulk.sh --None <path/to/Subnautica>')"
         exit 1
     fi
+    sevenzip="y"
+    rawr="y"
+    if ! command -v 7z >/dev/null 2>&1; then
+        sevenzip="n"
+    fi
+    if ! command -v unrar >/dev/null 2>&1; then
+        rawr="n"
+    fi
     for file in $subnauticaDirectory/BepInEx/plugins/*; do
-        if [[ "${file}" = *".zip" ]] || [[ "${file}" = *".7z" ]] || [[ "${file}" = *".rar" ]] || [[ "${file}" = *".tar"* ]]; then
+        if [[ "${file}" = *".zip" ]] || [[ "${file}" = *".tar"* ]]; then
+            echo "$file"
+            mv "${file}" "${directory}/$(basename "${file}")"
+        fi
+        if [[ "${file}" = *".7z" ]] && [[ "${sevenzip}" = "y" ]]; then
+            echo "$file"
+            mv "${file}" "${directory}/$(basename "${file}")"
+        fi
+        if [[ "${file}" = *".rar" ]] && [[ "${rawr}" = "y" ]]; then
             echo "$file"
             mv "${file}" "${directory}/$(basename "${file}")"
         fi
@@ -44,33 +60,9 @@ for file in $directory/*; do
         if [[ "${file}" == *.zip ]]; then
             unzip "$file" -d "$temp_dir"
         elif [[ "${file}" == *.7z ]]; then
-            if ! command -v 7z >/dev/null 2>&1
-            then
-                echo
-                echo
-                echo
-                echo "ERROR: No ability to decompress 7z. Please install 7zip"
-                echo
-                echo
-                echo
-                safe="n"
-            else
-                7z x "$file" -o"$temp_dir"
-            fi
-            elif [[ "${file}" == *.rar ]]; then
-            if ! command -v unrar >/dev/null 2>&1
-            then
-                echo
-                echo
-                echo
-                echo "ERROR: No ability to decompress rar. Please install unrar or unrar-free"
-                echo
-                echo
-                echo
-                safe="n"
-            else
-                unrar x "$file" "$temp_dir"
-            fi
+            7z x "$file" -o"$temp_dir"
+        elif [[ "${file}" == *.rar ]]; then
+            unrar x "$file" "$temp_dir"
         elif [[ "${file}" == *.tar* ]]; then
             tar –xf "$file" -C "$temp_dir"
         fi
@@ -143,4 +135,20 @@ for file in $directory/*; do
 done
 rm -rf $temp_dir
 
+if ! command -v 7z >/dev/null 2>&1; then
+    echo
+    echo
+    echo
+    echo "ERROR: No ability to decompress 7z. Please install 7zip"
+fi
+if ! command -v unrar >/dev/null 2>&1; then
+    echo
+    echo
+    echo
+    echo "ERROR: No ability to decompress rar. Please install unrar or unrar-free"
+fi
+
+echo
+echo
+echo
 echo "Done! All your mods should now be playable!"

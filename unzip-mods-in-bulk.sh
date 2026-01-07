@@ -55,7 +55,7 @@ temp_dir=$(mktemp -d)
 trap 'rm -rf -- "$temp_dir"' EXIT
 for file in $directory/*; do
     if [[ $file == *.zip ]] || [[ $file == *.7z ]] || [[ $file == *.rar ]] || [[ $file == *.tar* ]]; then
-        safe="y"
+        dllsPresent="y"
         cd $directory
         if [[ "${file}" == *.zip ]]; then
             unzip "$file" -d "$temp_dir"
@@ -66,71 +66,69 @@ for file in $directory/*; do
         elif [[ "${file}" == *.tar* ]]; then
             tar –xf "$file" -C "$temp_dir"
         fi
-        if [ $safe = "y" ]; then
-            cd $temp_dir
-            pluginsFolder=$(find "$temp_dir" -type d -name "plugins" || echo "")
-            configFolder=$(find "$temp_dir" -type d -name "config" || echo "")
-            if [ -z "$pluginsFolder" ]; then
-                for modFolder in *; do
-                    find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
-                        if [ ! -d "${destination}" ]; then
-                            mkdir -p "${destination}"
-                        fi
-                    done
-                    find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
-                        if [[ "${curFile}" =  *".structure" ]]; then
-                            destination="$subnauticaDirectory/BepInEx/plugins/EpicStructureLoader/Structures/$(basename "${curFile}")"
-                        fi
-                        if [[ "${curFile}" =  *".txt" ]]; then
-                            destination="$subnauticaDirectory/BepInEx/plugins/CustomCraft3/WorkingFiles/$(basename "${curFile}")"
-                        fi
-                        if [ ! -d "${destination%/*}" ]; then
-                            mkdir -p "${destination%/*}"
-                        fi
-                        mv "${curFile}" "${destination}"
-                    done
-                done
-            else
-                for modFolder in "${pluginsFolder}"/*; do
-                    find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$pluginsFolder\//}"
-                        if [ ! -d "${destination}" ]; then
-                            mkdir -p "${destination}"
-                        fi
-                    done
-                    find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$pluginsFolder\//}"
-                        if [[ "${curFile}" =  *".structure" ]]; then
-                            destination="$subnauticaDirectory/BepInEx/plugins/EpicStructureLoader/Structures/$(basename "${curFile}")"
-                        fi
-                        if [ ! -d "${destination%/*}" ]; then
-                            mkdir -p "${destination%/*}"
-                        fi
-                        mv "${curFile}" "${destination}"
-                    done
-                done
-            fi
-            if [ ! -z "$configFolder" ]; then
-                for modFolder in "${configFolder}"/*; do
-                    find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/config/${curFile/$configFolder\//}"
-                        if [ ! -d "${destination}" ]; then
-                            mkdir -p "${destination}"
-                        fi
-                    done
-                    find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
-                        destination="$subnauticaDirectory/BepInEx/config/${curFile/$configFolder\//}"
-                        if [ ! -d "${destination%/*}" ]; then
-                            mkdir -p "${destination%/*}"
-                        fi
-                        mv "${curFile}" "${destination}"
-                    done
-                done
-            fi
-            rm -rf "${temp_dir}/"*
+        if [ "$(find "/home/luna/.local/share/Steam/steamapps/common/Subnautica/" -name "*.dll" | wc -m)" -eq 0 ]; then
+            dllsPresent="n"
         fi
+        cd $temp_dir
+        pluginsFolder=$(find "$temp_dir" -type d -name "plugins" || echo "")
+        configFolder=$(find "$temp_dir" -type d -name "config" || echo "")
+        if [ -z "$pluginsFolder" ]; then
+            for modFolder in *; do
+                find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
+                    destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
+                    if [ ! -d "${destination}" ]; then
+                        mkdir -p "${destination}"
+                    fi
+                done
+                find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
+                    destination="$subnauticaDirectory/BepInEx/plugins/${curFile}"
+                    if [ $dllsPresent =  "n" ] && [[ "${curFile}" =  *".structure" ]]; then
+                        destination="$subnauticaDirectory/BepInEx/plugins/EpicStructureLoader/Structures/$(basename "${curFile}")"
+                    fi
+                    if [ $dllsPresent =  "n" ] && [[ "${curFile}" =  *".txt" ]]; then
+                        destination="$subnauticaDirectory/BepInEx/plugins/CustomCraft3/WorkingFiles/$(basename "${curFile}")"
+                    fi
+                    if [ ! -d "${destination%/*}" ]; then
+                        mkdir -p "${destination%/*}"
+                    fi
+                    mv "${curFile}" "${destination}"
+                done
+            done
+        else
+            for modFolder in "${pluginsFolder}"/*; do
+                find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
+                    destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$pluginsFolder\//}"
+                    if [ ! -d "${destination}" ]; then
+                        mkdir -p "${destination}"
+                    fi
+                done
+                find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
+                    destination="$subnauticaDirectory/BepInEx/plugins/${curFile/$pluginsFolder\//}"
+                    if [ ! -d "${destination%/*}" ]; then
+                        mkdir -p "${destination%/*}"
+                    fi
+                    mv "${curFile}" "${destination}"
+                done
+            done
+        fi
+        if [ ! -z "$configFolder" ]; then
+            for modFolder in "${configFolder}"/*; do
+                find "${modFolder}" -type d -empty -print0 | while read -d $'\0' curFile; do
+                    destination="$subnauticaDirectory/BepInEx/config/${curFile/$configFolder\//}"
+                    if [ ! -d "${destination}" ]; then
+                        mkdir -p "${destination}"
+                    fi
+                done
+                find "${modFolder}" -type f -print0 | while read -d $'\0' curFile; do
+                    destination="$subnauticaDirectory/BepInEx/config/${curFile/$configFolder\//}"
+                    if [ ! -d "${destination%/*}" ]; then
+                        mkdir -p "${destination%/*}"
+                    fi
+                    mv "${curFile}" "${destination}"
+                done
+            done
+        fi
+        rm -rf "${temp_dir}/"*
     fi
 done
 rm -rf $temp_dir

@@ -36,11 +36,8 @@ if [ $directory = "-n" ] || [ $directory = "--None" ]; then
 fi
 
 temp_dir=$(mktemp -d)
-echo "$temp_dir"
-echo
 for file in $directory/*
 do
-    echo $file
     if [[ $file == *.zip ]] || [[ $file == *.7z ]] || [[ $file == *.rar ]] || [[ $file == *.tar* ]]; then
         echo "Safe"
         safe="y"
@@ -81,19 +78,26 @@ do
         if [ $safe = "y" ]; then
             cd $temp_dir
             if [ -d "BepInEx" ]; then
+                for folder in BepInEx/*
+                do
+                    cd /
+                    mv "${temp_dir}/${folder}" "${subnauticaDirectory}/${folder}"
+                done
+                rm -rf "$temp_dir/BepInEx"
+            elif [ -d "BepInEx/plugins" ]; then
                 for folder in BepInEx/plugins/*
                 do
                     cd /
                     mv "${temp_dir}/${folder}" "${subnauticaDirectory}/${folder}"
                 done
-                rm -rf $temp_dir/BepInEx
+                rm -rf "$temp_dir/BepInEx"
             elif [ -d "plugins" ]; then
                 for folder in plugins/*
                 do
                     cd /
                     mv "${temp_dir}/${folder}" "${subnauticaDirectory}/BepInEx/${folder}"
                 done
-                rm -rf $temp_dir/plugins
+                rm -rf "$temp_dir/plugins"
             else
                 for folder in *
                 do
@@ -103,15 +107,17 @@ do
         fi
     fi
 done
-rm -rf $temp_dir
-cd $HOME
-if [ -d $subnauticaDirectory/BepInEx/plugins/Tobey ]; then
-    for file in $subnauticaDirectory/BepInEx/plugins/Tobey/*
-    do
-        temp="${file/Tobey\//}"
-        mv ${file// /\\ } ${temp// /\\ }
-    done
-    rm -rf $subnauticaDirectory/BepInEx/plugins/Tobey
-fi
+rm -rf "$temp_dir"
+# cd $HOME
+# if [ -d "$subnauticaDirectory/BepInEx/plugins/Tobey" ]; then
+#     for file in "$subnauticaDirectory/BepInEx/plugins/Tobey/"*
+#     do
+#         echo
+#         echo "$file"
+#         echo
+#         mv "$file" "${file/Tobey\//}"
+#     done
+#     rm -rf "$subnauticaDirectory/BepInEx/plugins/Tobey"
+# fi
 
 echo "Done! All your mods should now be playable!"

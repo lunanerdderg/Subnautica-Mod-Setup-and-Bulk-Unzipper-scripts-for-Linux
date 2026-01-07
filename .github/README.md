@@ -2,7 +2,7 @@
 
 These scripts are intended for Linux, and only work on Linux.
 
-These scripts are also intended for Steam. Other launcher users should look at the [Epic Launcher users](#epic-launcher-users) section.
+These scripts are also intended for Steam. Other launcher users should look at the [Epic users](#epic-users) section.
 
 * [`install.sh`](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/install.sh) semi-automates and eases the process of installing BepInEx and Nautilus.
 
@@ -116,9 +116,9 @@ Example: `unzip-mods-in-bulk.sh -n directory/of/Subnautica`
 
 *Note: Unlike `install.sh`, this script has no user prompts.*
 
-## Epic Launcher users:
+## Epic users:
 
-I do not own any Epic games, nor have I installed the launcher, so I truly have no idea if this will work on Epic. You might have some success if you follow the normal [installation](#install) and [use](#directions) instructions, but run `install.sh` like this:
+I do not own any Epic games, nor have I ever used the Epic Games Store, so I truly have no idea if this will work on Heroic or Lutris. You might have some success if you follow the normal [installation](#install) and [use](#directions) instructions, but run `install.sh` like this:
 
 ```
 install.sh -d <location of Subnautica folder>

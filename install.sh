@@ -129,13 +129,6 @@ if [ -d "$subnauticaDirectory/BepInEx" ]; then
     fi
 fi
 
-echo "Installing BepInEx..."
-cd $subnauticaDirectory
-wget https://github.com/toebeann/BepInEx.Subnautica/releases/latest/download/Tobey.s.BepInEx.Pack.for.Subnautica.zip
-y | unzip Tobey.s.BepInEx.Pack.for.Subnautica.zip
-rm -f Tobey.s.BepInEx.Pack.for.Subnautica.zip
-cd $HOME
-
 if [ $ignorePrompt = "n" ]; then
     echo ""
     echo ""
@@ -145,6 +138,22 @@ if [ $ignorePrompt = "n" ]; then
     echo "You can find this setting by going to Subnautica in your Steam Library, clicking the gear icon, and then clicking 'Properties'."
     read -p "(Press enter to confirm you've set your game launch options. Do NOT open Subnautica.)"
 fi
+
+echo "Installing BepInEx..."
+cd $subnauticaDirectory
+wget https://github.com/toebeann/BepInEx.Subnautica/releases/latest/download/Tobey.s.BepInEx.Pack.for.Subnautica.zip
+y | unzip Tobey.s.BepInEx.Pack.for.Subnautica.zip
+rm -f Tobey.s.BepInEx.Pack.for.Subnautica.zip
+cd $HOME
+if [ $tweaks = "y" ]; then
+    echo "Installing BepInEx Tweaks..."
+    wget https://github.com/toebeann/BepInExTweaks.Subnautica/releases/latest/download/Tobey.BepInExTweaks.Subnautica.zip
+    unzip Tobey.BepInExTweaks.Subnautica.zip
+    mv BepInEx/plugins/Tobey/BepInEx\ Tweaks BepInEx\ Tweaks || mv BepInEx/plugins/BepInEx\ Tweaks BepInEx\ Tweaks
+    rm -rf BepInEx
+    rm -f Tobey.BepInExTweaks.Subnautica.zip
+fi
+
 if [ $disableAutoopen = "n" ]; then
     steam steam://rungameid/264710
     sleep 10
@@ -185,14 +194,6 @@ mv plugins/Nautilus Nautilus
 rm -f Nautilus_SN.STABLE_${suffix}.zip
 rm -rf plugins
 
-if [ $tweaks = "y" ]; then
-    echo "Installing BepInEx Tweaks..."
-    wget https://github.com/toebeann/BepInExTweaks.Subnautica/releases/latest/download/Tobey.BepInExTweaks.Subnautica.zip
-    unzip Tobey.BepInExTweaks.Subnautica.zip
-    mv BepInEx/plugins/Tobey/BepInEx\ Tweaks BepInEx\ Tweaks || mv BepInEx/plugins/BepInEx\ Tweaks BepInEx\ Tweaks
-    rm -rf BepInEx
-    rm -f Tobey.BepInExTweaks.Subnautica.zip
-fi
 # if [ -d "$subnauticaDirectory/BepInEx/plugins/Tobey" ]; then
 #     for file in "$subnauticaDirectory/BepInEx/plugins/Tobey/"*
 #     do

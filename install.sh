@@ -80,6 +80,14 @@ if ! type "unrar" > /dev/null; then
     echo "unrar is not installed, but is only necessary if you have a .rar mod."
 fi
 
+if [ $ignorePrompt = "n" ]; then
+    echo ""
+    echo ""
+    echo ""
+    echo "You must have run Subnautica and processed Vulkan shaders at least once before using this program."
+    read -p "Press ENTER to confirm you've done it at any point, or quit the program if you have not."
+fi
+
 if [ ! -d "$subnauticaDirectory" ]; then
     subnauticaDirectory="$HOME/.local/share/Steam/steamapps/common/Subnautica/"
     if [ ! -d "$subnauticaDirectory" ]; then
@@ -98,22 +106,30 @@ cd $HOME
 
 if [ $ignorePrompt = "n" ]; then
     echo ""
+    echo ""
+    echo ""
     echo "Make sure you've set your Subnautica launch options as:"
     echo 'WINEDLLOVERRIDES="winhttp=n,b" %command%'
     echo "You can find this setting by going to Subnautica in your Steam Library, clicking the gear icon, and then clicking 'Properties'."
     read -p "(Press enter to confirm you've set your game launch options. Do NOT open Subnautica.)"
-    if [ $disableAutoopen = "n" ]; then
-        echo ""
-        echo ""
-        echo ""
-        echo "Press enter if you understand that Steam must be FULLY closed after Subnautica is automatically opened."
-        echo "Merely pressing the 'X' on the top right will NOT work!"
-        read -p "You will need to click the Steam logo on the top left, then 'Exit'."
-    fi
 fi
 if [ $disableAutoopen = "n" ]; then
-    echo "TEST"
     steam steam://rungameid/264710
+    sleep 10
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    read -p "Press ENTER once Subnautica is closed."
 elif [ $disableAutoopen = "y" ]; then
     read -p "Please open Subnautica, then quit it from the menu. Then press ENTER."
     if [ $ignorePrompt = "n" ]; then
@@ -145,6 +161,16 @@ if [ $tweaks = "y" ]; then
     rm -rf BepInEx
     rm -f Tobey.BepInExTweaks.Subnautica.zip
 fi
+# if [ -d "$subnauticaDirectory/BepInEx/plugins/Tobey" ]; then
+#     for file in "$subnauticaDirectory/BepInEx/plugins/Tobey/"*
+#     do
+#         echo
+#         echo "$file"
+#         echo
+#         mv "$file" "${file/Tobey\//}"
+#     done
+#     rm -rf "$subnauticaDirectory/BepInEx/plugins/Tobey"
+# fi
 
 if [ $terrainPatcher = "y" ]; then
     echo "Installing Terrain Patcher..."

@@ -1,4 +1,4 @@
-#### TL;DR: Copy and paste the [Launch Options](#launch-options-necessary) into Subnautica's properties, run the [install command](#install), run `install.sh`, [fully exit Steam](#directions), download your desired mods and dependencies into `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/`, then run `unzip-mods-in-bulk.sh`.
+#### TL;DR: Copy and paste the [Launch Options](#launch-options-necessary) into Subnautica's properties, run the [install command](#install), run `install.sh`, close Subnautica when it automatically opens, download your desired mods and dependencies into `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/`, then run `unzip-mods-in-bulk.sh`.
 
 These scripts are intended for Linux, and only work on Linux.
 
@@ -80,10 +80,7 @@ Don't worry about memorizing any instructions. `install.sh` will remind you.
 1. Copy and paste the [Launch Options](#launch-options-necessary) into Subnautica's properties.
 2. [Install the scripts.](#install)
 3. Run `install.sh` in the terminal (ideally the same terminal as before) with the desired [parameters](#parameters) listed below. Follow any instructions it gives you.
-4. When it automatically opens Subnautica for you, first quit from Subnautica's main menu, then exit Steam ***ENTIRELY***. (Go to the top left, click the Steam logo, then click "Exit". The "x" at the top right will only MINIMIZE it.)
-
-   <img src="https://raw.githubusercontent.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/master/.github/exit-screenshot.jpg" alt="Steam Exit screenshot" width="400"/>
-
+4. When it automatically opens Subnautica for you, quit from Subnautica's main menu. (Fully exiting Steam is no longer necessary as of [v0.2.0](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/releases/tag/v0.2.0).)
     * `install.sh` can now be deleted, if you want.
 6. *Keep the terminal window open.* Download all the mods you want to install. (Make sure to keep track of dependencies! *On Nexus in a mod's "Description" tab, clicking the "Requirements" button will reveal them.*)
 7. Place all the mods in a single folder if you want to keep the .zips, or place them in `~/.local/share/Steam/steamapps/common/Subnautica/BepInEx/plugins/` if you do not.

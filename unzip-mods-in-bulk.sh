@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Location of Subnautica saves on Lutris: $HOME/.lutris/epic-games-store/drive_c/users/luna/AppData/LocalLow/Unknown Worlds/Subnautica/Subnautica/SavedGames
+
 directory=${1:-"--None"}
 subnauticaDirectory=${2:-"$HOME/.local/share/Steam/steamapps/common/Subnautica"}
 extraArg=${3:-"--None"}
@@ -22,10 +24,33 @@ fi
 if [ $directory = "-n" ] || [ $directory = "--None" ]; then
     directory=$(mktemp -d)
     if [ ! -d "$subnauticaDirectory" ]; then
-        echo "Could not find Subnautica directory. Pass game folder as second argument."
-        echo "(If you never passed a first argument, pass '--None', then directory.)"
-        echo "(eg 'unzip-mods-in-bulk.sh --None <path/to/Subnautica>')"
-        exit 1
+        subnauticaDirectory="$HOME/.local/share/Steam/steamapps/common/Subnautica/"
+        if [ ! -d "$subnauticaDirectory" ]; then
+            subnauticaDirectory="$HOME/Games/Heroic/Subnautica/"
+            if [ ! -d "$subnauticaDirectory" ]; then
+                subnauticaDirectory="$HOME/.lutris/epic-games-store/drive_c/Program Files/Epic Games/Subnautica"
+                if [ ! -d "$subnauticaDirectory" ]; then
+                    echo ""
+                    echo ""
+                    echo ""
+                    echo ""
+                    echo ""
+                    echo ""
+                    echo "Could not find Subnautica directory. Pass game folder as second argument."
+                    echo "(If you never passed a first argument, pass '--None', then directory.)"
+                    echo "(eg 'unzip-mods-in-bulk.sh --None <path/to/Subnautica>')"
+                    echo ""
+                    echo "(Usually located at:)"
+                    echo " Steam:"
+                    echo "    $HOME/.local/share/Steam/steamapps/common/Subnautica/"
+                    echo " Heroic:"
+                    echo "    $HOME/Games/Heroic/Subnautica/"
+                    echo " Lutris:"
+                    echo "    $HOME/.lutris/epic-games-store/drive_c/Program Files/Epic Games/Subnautica"
+                    exit 1
+                fi
+            fi
+        fi
     fi
     sevenzip="y"
     rawr="y"

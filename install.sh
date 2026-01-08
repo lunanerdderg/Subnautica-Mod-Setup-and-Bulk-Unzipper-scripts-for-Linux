@@ -91,15 +91,27 @@ fi
 if [ ! -d "$subnauticaDirectory" ]; then
     subnauticaDirectory="$HOME/.local/share/Steam/steamapps/common/Subnautica/"
     if [ ! -d "$subnauticaDirectory" ]; then
-        echo ""
-        echo ""
-        echo ""
-        echo ""
-        echo ""
-        echo ""
-        echo "Could not find Subnautica directory. Check if installed with Steam, or pass location as argument."
-        echo "(Usually '$HOME/.local/share/Steam/steamapps/common/Subnautica/')"
-        exit 1
+        subnauticaDirectory="$HOME/Games/Heroic/Subnautica/"
+        if [ ! -d "$subnauticaDirectory" ]; then
+            subnauticaDirectory="$HOME/.lutris/epic-games-store/drive_c/Program Files/Epic Games/Subnautica"
+            if [ ! -d "$subnauticaDirectory" ]; then
+                echo ""
+                echo ""
+                echo ""
+                echo ""
+                echo ""
+                echo ""
+                echo "Could not find Subnautica directory. Check if installed, or pass location as argument."
+                echo "(Usually at:)"
+                echo " Steam:"
+                echo "    $HOME/.local/share/Steam/steamapps/common/Subnautica/"
+                echo " Heroic:"
+                echo "    $HOME/Games/Heroic/Subnautica/"
+                echo " Lutris:"
+                echo "    $HOME/.lutris/epic-games-store/drive_c/Program Files/Epic Games/Subnautica"
+                exit 1
+            fi
+        fi
     fi
 fi
 

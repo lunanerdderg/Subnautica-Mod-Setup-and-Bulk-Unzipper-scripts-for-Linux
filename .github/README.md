@@ -2,7 +2,7 @@
 
 These scripts are intended for Linux, and only work on Linux.
 
-These scripts are also intended for Steam. Other launcher users should look at the [Epic users](#epic-users) section.
+These scripts are also intended for Steam. Other launcher users should look at the [Epic users](#epic-users) section, which will have instructions for how to use it on Heroic or Lutris.
 
 * [`install.sh`](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/install.sh) semi-automates and eases the process of installing BepInEx and Nautilus.
 
@@ -118,7 +118,29 @@ Example: `unzip-mods-in-bulk.sh -n directory/of/Subnautica`
 
 ## Epic users:
 
-I do not own any Epic games, nor have I ever used the Epic Games Store, so I truly have no idea if this will work on Heroic or Lutris. You might have some success if you follow the normal [installation](#install) and [use](#directions) instructions, but run `install.sh` like this:
+I do not own any Epic games, nor have I ever used the Epic Games Store, so I truly have no idea if this will work on Heroic or Lutris, but I tried to make it as compatible as possible.
+
+### Heroic
+
+On Heroic, go into the Subnautica settings, go to the "Advanced" tab, and then make a new Environment Variable called `WINEDLLOVERRIDES` and set its value to `winhttp=n,b`. (This is the Heroic version of the [Steam Launch Options](#launch-options-necessary).)
+
+Then follow the normal [installation](#install) and [use](#directions) instructions, but run `install.sh` like this:
+
+```
+install.sh -d
+```
+
+Then open and close Subnautica when it prompts you. You can run `unzip-mods-in-bulk.sh` like this:
+
+```
+unzip-mods-in-bulk.sh <location of mods>
+```
+
+### Lutris
+
+On Lutris, right-click on Subnautica, then click "Configure". Go to the "Runner Options" tab, then add a DLL override. Set the Key to `winhttp` and the Value to `n,b`. Then click "Save". (This is the Lutris version of the [Steam Launch Options](#launch-options-necessary).)
+
+Then follow the normal [installation](#install) and [use](#directions) instructions, but run `install.sh` like this:
 
 ```
 install.sh -d <location of Subnautica folder>
@@ -127,7 +149,7 @@ install.sh -d <location of Subnautica folder>
 Then open and close Subnautica when it prompts you. Also run `unzip-mods-in-bulk.sh` like this:
 
 ```
-install.sh <location of mods> <location of Subnautica folder>
+unzip-mods-in-bulk.sh <location of mods> <location of Subnautica folder>
 ```
 
 # License

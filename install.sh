@@ -190,15 +190,9 @@ elif [ $disableAutoopen = "y" ]; then
 fi
 
 echo "Installing Nautilus..."
-temp_dir=$(mktemp -d)
-cd ${temp_dir}
-git clone https://github.com/SubnauticaModding/Nautilus
-cd Nautilus
-curTag="$(git describe --tags --abbrev=0)"
-cd /
-rm -rf $temp_dir
-suffix=${curTag/-pre/}
 cd $subnauticaDirectory/BepInEx/plugins/
+curTag=$(curl -s https://api.github.com/repos/SubnauticaModding/Nautilus/releases | jq -r 'map(select(.prerelease)) | .[0].tag_name')
+suffix="${curTag/-pre/}"
 wget "https://github.com/SubnauticaModding/Nautilus/releases/download/${curTag}/Nautilus_SN.STABLE_${suffix}.zip"
 unzip Nautilus_SN.STABLE_${suffix}.zip
 mv plugins/Nautilus Nautilus

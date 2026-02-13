@@ -110,7 +110,7 @@ All listed parameters are optional, but MUST be used IN ORDER. If you want to us
 
 Example: `unzip-mods-in-bulk.sh -n directory/of/Subnautica`
 
-	-h, --help: Show this help menu
+	-h, --help: Display this guide
 	1. Folder containing mod zips (defaults to "Subnautica/BepInEx/plugins" folder)
 	2. Directory of Subnautica game folder
 

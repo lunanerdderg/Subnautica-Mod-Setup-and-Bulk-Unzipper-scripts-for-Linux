@@ -38,7 +38,7 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
 
 ## Dependencies (can be skipped):
 
-**The script will tell you what you have don't have installed. This section can be skipped.**
+**The script will tell you what you have or don't have installed. This section can be skipped.**
 
 (Dependencies with no link should be installed through your distribution's package manager. **Do not try to install these without checking if you already have them first.**)
 
@@ -47,6 +47,7 @@ WINEDLLOVERRIDES="winhttp=n,b" %command%
 * **curl** (Pre-installed on most distros)
 * **wget** (Pre-installed on most distros)
 * **unzip** (Pre-installed on most distros)
+* **tar** (Pre-installed on most distros)
 * Optional, unless .7z or .rar used by mod:
   * Either **p7zip-full** or **[7zip](https://7-zip.org/download.html)** (for mods compressed in .7z format)
   * Either **unrar-free** or **[unrar](https://www.rarlab.com/rar_add.htm)** (for mods compressed in .rar format)

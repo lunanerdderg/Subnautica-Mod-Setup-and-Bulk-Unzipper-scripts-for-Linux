@@ -162,3 +162,5 @@ You may view the Mozilla Public License 2.0 [here](https://github.com/lunanerdde
 * Your project uses a [Mozilla or GNU license](https://choosealicense.com/licenses/)
 
 (Technically the license also protects any "trademarks" I create, but the only intellectual property here is my code and this README, which are both under copyright law, and cannot be trademarked.)
+
+*This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.*

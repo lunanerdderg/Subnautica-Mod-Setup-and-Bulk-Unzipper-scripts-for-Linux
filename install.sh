@@ -13,7 +13,6 @@ if [ $ARG1 = "-h" ] || [ $ARG1 = "--help" ] || [ $ARG2 = "-h" ] || [ $ARG2 = "--
     echo
     echo "    -h, --help               Display this guide"
     echo "    path/to/directory        Use path as Subnautica game directory"
-    echo "    -n, --no-tweaks          Do not install Toebeann's BepInEx Tweaks for Subnautica"
     echo "    -t, --terrain-patcher    Install Esper89's Terrain Patcher mod"
     echo "    -d, --disable-autoopen   Do not open Subnautica automatically. Allow user to do it manually instead"
     echo "    -i, --ignore-prompt      Disable most user prompts (do not use if first time running)"
@@ -35,11 +34,6 @@ elif [ $ARG4 != "-"* ]; then
 elif [ $ARG5 != "-"* ]; then
     subnauticaDirectory=$ARG5
     changedDirectory="y"
-fi
-if [ $ARG1 = "-n" ] || [ $ARG1 = "--no-tweaks" ] || [ $ARG2 = "-n" ] || [ $ARG2 = "--no-tweaks" ] || [ $ARG3 = "-n" ] || [ $ARG3 = "--no-tweaks" ] || [ $ARG4 = "-n" ] || [ $ARG4 = "--no-tweaks" ] || [ $ARG5 = "-n" ] || [ $ARG5 = "--no-tweaks" ]; then
-    tweaks="n"
-else
-    tweaks="y"
 fi
 if [ $ARG1 = "-t" ] || [ $ARG1 = "--terrain-patcher" ] || [ $ARG2 = "-t" ] || [ $ARG2 = "--terrain-patcher" ] || [ $ARG3 = "-t" ] || [ $ARG3 = "--terrain-patcher" ] || [ $ARG4 = "-t" ] || [ $ARG4 = "--terrain-patcher" ] || [ $ARG5 = "-t" ] || [ $ARG5 = "--terrain-patcher" ]; then
     terrainPatcher="y"
@@ -157,13 +151,6 @@ wget https://github.com/toebeann/BepInEx.Subnautica/releases/latest/download/Tob
 y | unzip Tobey.s.BepInEx.Pack.for.Subnautica.zip
 rm -f Tobey.s.BepInEx.Pack.for.Subnautica.zip
 cd $HOME
-if [ $tweaks = "y" ]; then
-    wget https://github.com/toebeann/BepInExTweaks.Subnautica/releases/latest/download/Tobey.BepInExTweaks.Subnautica.zip
-    unzip Tobey.BepInExTweaks.Subnautica.zip
-    mv BepInEx/plugins/Tobey/BepInEx\ Tweaks BepInEx\ Tweaks || mv BepInEx/plugins/BepInEx\ Tweaks BepInEx\ Tweaks
-    rm -rf BepInEx
-    rm -f Tobey.BepInExTweaks.Subnautica.zip
-fi
 
 if [ $disableAutoopen = "n" ]; then
     steam steam://rungameid/264710
@@ -209,15 +196,6 @@ rm -rf plugins
 #     done
 #     rm -rf "$subnauticaDirectory/BepInEx/plugins/Tobey"
 # fi
-
-if [ $tweaks = "y" ]; then
-    echo "Installing BepInEx Tweaks..."
-    wget https://github.com/toebeann/BepInExTweaks.Subnautica/releases/latest/download/Tobey.BepInExTweaks.Subnautica.zip
-    y | unzip Tobey.BepInExTweaks.Subnautica.zip
-    mv BepInEx/plugins/Tobey/BepInEx\ Tweaks BepInEx\ Tweaks || mv BepInEx/plugins/BepInEx\ Tweaks BepInEx\ Tweaks
-    rm -rf BepInEx
-    rm -f Tobey.BepInExTweaks.Subnautica.zip
-fi
 
 if [ $terrainPatcher = "y" ]; then
     echo "Installing Terrain Patcher..."

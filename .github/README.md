@@ -10,6 +10,8 @@ These scripts are also intended for Steam. Other launcher users should look at t
   * (The organization of subfolders is different between mods, since mod developers are a community of people. The script should be able to handle most inconsistencies.)
   * `unzip-mods-in-bulk.sh` can be re-used as much as you like to install more mods.
 
+_[How version numbering works in all my programs.](https://github.com/lunanerdderg/lunanerdderg.github.io/blob/main/version-numbering.md)_
+
 # IMPORTANT (before you begin):
 
 ## Launch Options: (NECESSARY)

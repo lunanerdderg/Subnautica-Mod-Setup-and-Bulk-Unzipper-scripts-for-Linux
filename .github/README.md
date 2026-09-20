@@ -157,12 +157,6 @@ unzip-mods-in-bulk.sh <location of mods> <location of Subnautica folder>
 
 # License
 
-You may view the Mozilla Public License 2.0 [here](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/LICENSE), but the TL;DR is that you can use this project for whatever you like, as long as:
-
-* You credit me
-* Your project is open-source
-* Your project uses a [Mozilla or GNU license](https://choosealicense.com/licenses/)
-
-(Technically the license also protects any "trademarks" I create, but the only intellectual property here is my code and this README, which are both under copyright law, and cannot be trademarked. None of this specific project or repository is trademarked.)
+This project is currently undergoing a transition into using the [Unlicense](https://github.com/lunanerdderg/Subnautica-Mod-Setup-and-Bulk-Unzipper-scripts-for-Linux/blob/main/LICENSE), which places all the code in this project directly into the public domain.
 
 *This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.*
